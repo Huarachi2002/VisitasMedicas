@@ -1,5 +1,6 @@
 ﻿using BackendVisitaNET.Data;
 using BackendVisitaNET.Models;
+using Clientes.Dto;
 using Clientes.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,7 @@ namespace BackendVisitaNET.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Cliente cliente)
+        public async Task<IActionResult> Post([FromBody] ClienteDto cliente)
         {
             if (cliente == null)
             {
@@ -62,7 +63,74 @@ namespace BackendVisitaNET.Controllers
 
             try
             {
-                var createdCliente = await _clientesService.CreateClienteAsync(cliente);
+                var cliente1 = new Cliente1
+                {
+                    ReferenciaUbicacion = cliente.ReferenciaUbicacion,
+                    Foto = cliente.Foto,
+                    Barrio = cliente.Barrio,
+                    Lote = cliente.Lote,
+                    UV = cliente.UV,
+                    Manzana = cliente.Manzana,
+                    NroCasa = cliente.NroCasa,
+                    Especialidad1 = cliente.Especialidad1,
+                    Especialidad2 = cliente.Especialidad2,
+                    Especialidad3 = cliente.Especialidad3,
+                    Categoria = cliente.Categoria,
+                    Dias = cliente.Dias,
+                    Turno = cliente.Turno,
+                    FechaNacimiento = cliente.FechaNacimiento,
+                    IdRegional = cliente.IdRegional,
+                    Movil = cliente.Movil
+                };
+
+                var newCliente = new Cliente
+                {
+                    CodigoERP = cliente.CodigoERP,
+                    Ci = cliente.Ci,
+                    Nombre = cliente.Nombre,
+                    Paterno = cliente.Paterno,
+                    Materno = cliente.Materno,
+                    Nit = cliente.Nit,
+                    Direccion = cliente.Direccion,
+                    Telefono = cliente.Telefono,
+                    Email = cliente.Email,
+                    LimiteCredito = cliente.LimiteCredito,
+                    SaldoDeudor = cliente.SaldoDeudor,
+                    Longitud = cliente.Longitud,
+                    Latitud = cliente.Latitud,
+                    FechaRegistro = cliente.FechaRegistro,
+                    Estado = 1 ,
+                    IdListaPrecio = cliente.IdListaPrecio,
+                    IdPorcentajeDescuento = cliente.IdPorcentajeDescuento,
+                    IdNivelC1 = cliente.IdNivelC1,
+                    IdSucursal = cliente.IdSucursal,
+                    IdTipoCliente = cliente.IdTipoCliente,
+                    Transaccion = cliente.Transaccion,
+                    HashCode = cliente.HashCode,
+                    Celular = cliente.Celular,
+                    IdTabla = cliente.IdTabla,
+                    IdCliente1 = cliente1.Id,
+                    Visitado = cliente.Visitado,
+                    IdTipoPersona = cliente.IdTipoPersona,
+                    TipoLIsta = cliente.TipoLIsta,
+                    DiasPlazo = cliente.DiasPlazo,
+                    RazonSocial = cliente.RazonSocial,
+                    tipo = cliente.tipo,
+                    fecha = cliente.fecha,
+                    IdEmpleado = cliente.IdEmpleado,
+                    Facturado = cliente.Facturado,
+                    Consignacion = cliente.Consignacion,
+                    CopiaAdicionalFactura = cliente.CopiaAdicionalFactura,
+                    CodigoPadre = cliente.CodigoPadre,
+                    CantidadCompras = cliente.CantidadCompras,
+                    FechaUltimaCompra = cliente.FechaUltimaCompra,
+                    IdTipoDocumentoSFE = cliente.IdTipoDocumentoSFE,
+                    Extension = cliente.Extension,
+                    AplicarSustituto = cliente.AplicarSustituto
+                };
+
+
+                var createdCliente = await _clientesService.CreateClienteAsync(newCliente, cliente1);
                 var response = new ApiResponse<Cliente>
                 {
                     Success = true,

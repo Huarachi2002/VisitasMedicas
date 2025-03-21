@@ -9,11 +9,10 @@ namespace BackendVisitaNET.Models
         [Key]
         public long Id { get; set; }
         [Required]
-        public string CodigoERP { get; set; } = string.Empty;
-
+        public string CodigoERP { get; set; } 
         [Required]
         [MaxLength(200)]
-        public string Nombre { get; set; } = string.Empty;
+        public string Nombre { get; set; }
         public string? Paterno { get; set; }
         public string? Materno { get; set; }
         public string? Direccion { get; set; }
@@ -26,6 +25,7 @@ namespace BackendVisitaNET.Models
         public long? IdNivelC1 { get; set; }
         public int? VisitaProgramada { get; set; }
         public long? IdSucursal { get; set; }
+        public virtual Sucursal? Sucursal { get; set; }
         public decimal? PorcentajeDescuento { get; set; }
         public string? Email { get; set; }
         public int? ValidarUbicacion { get; set; }

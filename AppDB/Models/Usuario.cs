@@ -14,11 +14,16 @@ namespace BackendVisitaNET.Models
 
         [Required]
         [MaxLength(50)]
-        public string Contrasena { get; set; }  // Almacenada en Base64 (SHA-256)
+        public string Contrasena { get; set; }  
 
         [Required]
-        public int Estado { get; set; } // 1 = Activo, 0 = Inactivo
-
-        public long IdEmpleado { get; set; } // Relación con Empleado
+        public int Estado { get; set; } 
+        [Required]
+        public long IdEmpleado { get; set; } 
+        public virtual Empleado Empleado { get; set; }
+        public long? IdTipoUsuario { get; set; }
+        public virtual TipoUsuario? TipoUsuario { get; set; }
+        [MaxLength(50)]
+        public string? Imei { get; set; }
     }
 }

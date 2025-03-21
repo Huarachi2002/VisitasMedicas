@@ -62,7 +62,7 @@ public class AuthController : ControllerBase
         var data = new
         {
             token = token,
-            usuario.IdEmpleado
+            IdEmpleado = usuario.IdEmpleado
         };
 
         var response = new ApiResponse<object>

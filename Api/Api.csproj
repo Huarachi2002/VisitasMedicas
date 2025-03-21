@@ -22,6 +22,8 @@
     <ProjectReference Include="..\AppDB\AppDB.csproj" />
     <ProjectReference Include="..\Clientes\Clientes.csproj" />
     <ProjectReference Include="..\Empleados\Empleados.csproj" />
+    <ProjectReference Include="..\Regionales\Regionales.csproj" />
+    <ProjectReference Include="..\Sucursales\Sucursales.csproj" />
   </ItemGroup>
 
 </Project>

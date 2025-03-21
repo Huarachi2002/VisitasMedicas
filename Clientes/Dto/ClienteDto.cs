@@ -1,37 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace BackendVisitaNET.Models
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Clientes.Dto
 {
-    [Table("Cliente", Schema = "ERP")]
-    public class Cliente
+    public class ClienteDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        // Cliente
         public string? CodigoERP { get; set; }
         public string? Ci { get; set; }
-        [Required]
-        [MaxLength(150)]
         public string Nombre { get; set; }
         public string? Paterno { get; set; }
         public string? Materno { get; set; }
-        [Required]
         public string Nit { get; set; }
         public string? Direccion { get; set; }
         public string? Telefono { get; set; }
         public string? Email { get; set; }
-        [Required]
         public decimal LimiteCredito { get; set; }
-        [Required]
         public decimal SaldoDeudor { get; set; }
-        [Required]
         public decimal Longitud { get; set; }
-        [Required]
         public decimal Latitud { get; set; }
-        [Required]
         public DateTime FechaRegistro { get; set; }
-        [Required]
         public int Estado { get; set; }
         public long? IdListaPrecio { get; set; }
         public long? IdPorcentajeDescuento { get; set; }
@@ -43,7 +35,6 @@ namespace BackendVisitaNET.Models
         public string? Celular { get; set; }
         public long? IdTabla { get; set; }
         public long? IdCliente1 { get; set; }
-        public virtual Cliente1? Cliente1 { get; set; }
         public int Visitado { get; set; }
         public long? IdTipoPersona { get; set; }
         public long? TipoLIsta { get; set; }
@@ -62,5 +53,22 @@ namespace BackendVisitaNET.Models
         public string? Extension { get; set; }
         public int? AplicarSustituto { get; set; }
 
+        // Cliente1
+        public string? ReferenciaUbicacion { get; set; }
+        public string? Foto { get; set; }
+        public string? Barrio { get; set; }
+        public string? Lote { get; set; }
+        public string? UV { get; set; }
+        public string? Manzana { get; set; }
+        public string? NroCasa { get; set; }
+        public string Especialidad1 { get; set; }
+        public string? Especialidad2 { get; set; }
+        public string? Especialidad3 { get; set; }
+        public string Categoria { get; set; }
+        public string Dias { get; set; }
+        public string Turno { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public long IdRegional { get; set; }
+        public string? Movil { get; set; }
     }
 }

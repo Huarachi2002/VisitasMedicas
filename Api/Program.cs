@@ -8,6 +8,8 @@ using BackendVisitaNET.Models;
 using Microsoft.AspNetCore.Authorization;
 using Clientes.Services;
 using Empleados.Services;
+using Sucursales.Services;
+using Regionales.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +23,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Configurar OData con las entidades permitidas
 ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
-modelBuilder.EntitySet<Empleado>("Empleados");
+modelBuilder.EntitySet<Regional>("Regional");
+modelBuilder.EntitySet<Sucursal>("Sucursal");
 modelBuilder.EntitySet<Cliente>("Clientes");
+modelBuilder.EntitySet<Cliente1>("Cliente1");
+modelBuilder.EntitySet<Empleado>("Empleados");
+modelBuilder.EntitySet<TipoUsuario>("TipoUsuario");
 modelBuilder.EntitySet<Usuario>("Usuarios");
+
 
 var jwtIssuer = builder.Configuration.GetValue<string>("Jwt:Issuer");
 var jwtAudience = builder.Configuration.GetValue<string>("Jwt:Audience");
@@ -86,6 +93,8 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddScoped<ClientesService>();
+builder.Services.AddScoped<SucursalesService>();
+builder.Services.AddScoped<RegionalesService>();
 builder.Services.AddScoped<EmpleadosService>();
 builder.Services.AddControllers()
     .AddOData(opt => opt
@@ -94,7 +103,7 @@ builder.Services.AddControllers()
         .OrderBy()
         .Expand()
         .Count()
-        .SetMaxTop(100) // Opcional, establece un límite de resultados
+        //.SetMaxTop(100) // Opcional, establece un límite de resultados
         .AddRouteComponents("odata", modelBuilder.GetEdmModel()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

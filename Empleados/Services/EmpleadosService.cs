@@ -23,10 +23,19 @@ namespace Empleados.Services
 
         public async Task<Empleado> CreateEmpleadoAsync(Empleado empleado)
         {
-            empleado.FechaRegistro = empleado.FechaRegistro.ToUniversalTime();
-            _context.Empleados.Add(empleado);
-            await _context.SaveChangesAsync();
-            return empleado;
+            try
+            {
+                empleado.FechaRegistro = empleado.FechaRegistro.Kind == DateTimeKind.Utc
+                    ? empleado.FechaRegistro
+                    : empleado.FechaRegistro.ToUniversalTime();
+                _context.Empleados.Add(empleado);
+                await _context.SaveChangesAsync();
+                return empleado;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<Empleado> UpdateEmpleadoAsync(long id, Empleado empleado)
