@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="9.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
@@ -24,6 +31,7 @@
     <ProjectReference Include="..\Empleados\Empleados.csproj" />
     <ProjectReference Include="..\Regionales\Regionales.csproj" />
     <ProjectReference Include="..\Sucursales\Sucursales.csproj" />
+    <ProjectReference Include="..\Usuario\Usuarios.csproj" />
   </ItemGroup>
 
 </Project>

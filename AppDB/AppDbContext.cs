@@ -16,7 +16,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        
+        // TODO: Regional
         modelBuilder.Entity<Regional>()
             .ToTable("Regional", "NIV")
             .HasData(
@@ -27,6 +28,7 @@ public class AppDbContext : DbContext
                 new Regional { Id = 5, Nombre = "Beni" }
             );
 
+        // TODO: Sucursal
         modelBuilder.Entity<Sucursal>()
             .HasOne(su => su.Regional)
             .WithMany()
@@ -46,6 +48,8 @@ public class AppDbContext : DbContext
                 new Sucursal { Id = 5, CodigoERP = "BEN", Nombre = "Beni", Direccion = "Av. 6 de Agosto", IdDepartamento = 11191, FechaRegistro = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), Estado = 1, IdEmpresa = 1, IdRegional = 5, Tipo = 1, Latitud = 0, Longitud = 0, Lugar = "Beni", ZonaFranca = 0 }
             );
 
+
+        // TODO: TipoUsuario
         modelBuilder.Entity<TipoUsuario>()
             .ToTable("TipoUsuario", "SIS")
             .HasData(
@@ -53,6 +57,8 @@ public class AppDbContext : DbContext
                 new TipoUsuario { Id = 2, CodigoERP = "002", Descripcion = "Administrador", Abreviatura = "ADM", Tipo = 1 }
             );
 
+
+        // TODO: Usuario
         modelBuilder.Entity<Usuario>()
             .HasOne(u => u.TipoUsuario)
             .WithMany()
@@ -68,7 +74,9 @@ public class AppDbContext : DbContext
             .HasData(
                 new Usuario { Id = 1, Login = "DMS", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 1, IdTipoUsuario = 1, Imei = null }
             );
+        
 
+        // TODO: Cliente
         modelBuilder.Entity<Cliente>()
             .HasOne(c => c.Cliente1)
             .WithMany()
@@ -91,6 +99,7 @@ public class AppDbContext : DbContext
             .HasColumnType("timestamp with time zone");
 
 
+        // TODO: Empleado
         modelBuilder.Entity<Empleado>()
             .HasOne(e => e.Sucursal)
             .WithMany()
@@ -107,6 +116,7 @@ public class AppDbContext : DbContext
                 new Empleado { Id = 1, CodigoERP = "admin", Nombre = "admin", Paterno = null, Materno = null, Direccion = null, Telefono = null, Celular = null, FechaRegistro = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), Estado = 1, IdNivelC1 = null, VisitaProgramada = 0, IdSucursal = 2, PorcentajeDescuento = 0, Email = null, ValidarUbicacion = 0, tracking = 0, IdListaPrecio = null, ReImpresion = 0, Origen = 0, CodigoSucursalSin = "-1", CodigoPuntoVentaSin = "-1", EmpleadoFacturador = null, AbonoPedido = null }
             );
 
+        // TOOD: Cliente1
         modelBuilder.Entity<Cliente1>()
             .HasOne(c1 => c1.Regional)
             .WithMany()

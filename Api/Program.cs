@@ -10,6 +10,8 @@ using Clientes.Services;
 using Empleados.Services;
 using Sucursales.Services;
 using Regionales.Services;
+using Usuarios.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,6 +96,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<ClientesService>();
 builder.Services.AddScoped<SucursalesService>();
+builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<RegionalesService>();
 builder.Services.AddScoped<EmpleadosService>();
 builder.Services.AddControllers()

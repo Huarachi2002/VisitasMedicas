@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 namespace BackendVisitaNET.Controllers
 {
     //[Authorize] // Requiere autenticación para acceder
-    [Route("odata/Clientes")]
+    [Route("api/Clientes")]
     public class ClientesController : ODataController
     {
         private readonly ClientesService _clientesService;

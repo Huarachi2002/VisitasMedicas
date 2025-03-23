@@ -11,7 +11,7 @@ using Sucursales.Services;
 
 namespace BackendVisitaNET.Controllers
 {
-    [Route("odata/Sucursales")]
+    [Route("api/Sucursales")]
     public class SucursalesController : ODataController
     {
         private readonly SucursalesService _sucursalesService;

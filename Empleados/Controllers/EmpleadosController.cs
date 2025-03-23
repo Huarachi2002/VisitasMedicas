@@ -11,7 +11,7 @@ using Empleados.Services;
 namespace BackendVisitaNET.Controllers
 {
     //[Authorize] // Requiere autenticación para acceder
-    [Route("odata/Empleados")]
+    [Route("api/Empleados")]
     public class EmpleadosController : ODataController
     {
         private readonly EmpleadosService _empleadosService;

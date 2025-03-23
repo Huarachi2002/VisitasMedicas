@@ -11,7 +11,7 @@ using System.Data.SqlTypes;
 
 namespace BackendVisitaNET.Controllers
 {
-    [Route("odata/Regionales")]
+    [Route("api/Regionales")]
     public class RegionalesController : ODataController
     {
         private readonly RegionalesService _regionalesSevice;
