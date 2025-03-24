@@ -94,6 +94,15 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser().RequireRole("1"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularFrontend", policy =>
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials()); // Si usas autenticación JWT con cookies
+});
+
 builder.Services.AddScoped<ClientesService>();
 builder.Services.AddScoped<SucursalesService>();
 builder.Services.AddScoped<UsuarioService>();
@@ -115,6 +124,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("AllowAngularFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
