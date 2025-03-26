@@ -46,7 +46,7 @@ namespace AppDB.Models
         public virtual Cliente1? Cliente1 { get; set; }
         public int Visitado { get; set; }
         public long? IdTipoPersona { get; set; }
-        public long? TipoLIsta { get; set; }
+        public long? TipoLista { get; set; }
         public decimal? DiasPlazo { get; set; }
         public string? RazonSocial { get; set; }
         public int? tipo { get; set; }

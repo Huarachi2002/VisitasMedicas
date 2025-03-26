@@ -163,7 +163,7 @@ namespace AppDB.Migrations
                     IdCliente1 = table.Column<long>(type: "bigint", nullable: true),
                     Visitado = table.Column<int>(type: "integer", nullable: false),
                     IdTipoPersona = table.Column<long>(type: "bigint", nullable: true),
-                    TipoLIsta = table.Column<long>(type: "bigint", nullable: true),
+                    TipoLista = table.Column<long>(type: "bigint", nullable: true),
                     DiasPlazo = table.Column<decimal>(type: "numeric", nullable: true),
                     RazonSocial = table.Column<string>(type: "text", nullable: true),
                     tipo = table.Column<int>(type: "integer", nullable: true),

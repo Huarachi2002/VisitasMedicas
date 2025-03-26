@@ -112,7 +112,7 @@ namespace BackendVisitaNET.Controllers
                     IdCliente1 = cliente1.Id,
                     Visitado = cliente.Visitado,
                     IdTipoPersona = cliente.IdTipoPersona,
-                    TipoLIsta = cliente.TipoLIsta,
+                    TipoLista = cliente.TipoLista,
                     DiasPlazo = cliente.DiasPlazo,
                     RazonSocial = cliente.RazonSocial,
                     tipo = cliente.tipo,

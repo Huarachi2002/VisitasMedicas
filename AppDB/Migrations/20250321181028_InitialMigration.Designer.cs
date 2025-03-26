@@ -146,7 +146,7 @@ namespace AppDB.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("text");
 
-                    b.Property<long?>("TipoLIsta")
+                    b.Property<long?>("TipoLista")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Transaccion")
