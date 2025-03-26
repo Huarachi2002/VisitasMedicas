@@ -118,7 +118,7 @@ namespace BackendVisitaNET.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, [FromBody] Empleado empleado)
+        public async Task<IActionResult> Put(long id, [FromBody] EmpleadoDto empleado)
         {
             if (empleado == null || id != empleado.Id)
             {
@@ -132,8 +132,37 @@ namespace BackendVisitaNET.Controllers
                 return BadRequest(response);
             }
 
-            var updatedEmpleado = await _empleadosService.UpdateEmpleadoAsync(id, empleado);
-            if (updatedEmpleado == null)
+
+            var empleadoExistente = _empleadosService.GetAllEmpleados().First<Empleado>(e => e.Id == id);
+            
+            empleadoExistente.CodigoERP = empleado.CodigoERP;
+            empleadoExistente.Nombre = empleado.Nombre;
+            empleadoExistente.Paterno = empleado.Paterno;
+            empleadoExistente.Materno = empleado.Materno;
+            empleadoExistente.Direccion = empleado.Direccion;
+            empleadoExistente.Telefono = empleado.Telefono;
+            empleadoExistente.Celular = empleado.Celular;
+            empleadoExistente.FechaRegistro = empleado.FechaRegistro;
+            empleadoExistente.Estado = empleado.Estado;
+            empleadoExistente.IdNivelC1 = empleado.IdNivelC1;
+            empleadoExistente.VisitaProgramada = empleado.VisitaProgramada;
+            empleadoExistente.IdSucursal = empleado.IdSucursal;
+            empleadoExistente.Sucursal = empleado.Sucursal;
+            empleadoExistente.PorcentajeDescuento = empleado.PorcentajeDescuento;
+            empleadoExistente.Email = empleado.Email;
+            empleadoExistente.ValidarUbicacion = empleado.ValidarUbicacion;
+            empleadoExistente.tracking = empleado.tracking;
+            empleadoExistente.IdListaPrecio = empleado.IdListaPrecio;
+            empleadoExistente.ReImpresion = empleado.ReImpresion;
+            empleadoExistente.Origen = empleado.Origen;
+            empleadoExistente.CodigoSucursalSin = empleado.CodigoSucursalSin;
+            empleadoExistente.CodigoPuntoVentaSin = empleado.CodigoPuntoVentaSin;
+            empleadoExistente.EmpleadoFacturador = empleado.EmpleadoFacturador;
+            empleadoExistente.AbonoPedido = empleado.AbonoPedido;
+
+            var updatedEspecialidadesByEmpleado = await _empleadoEspecialidadService.UpdateEspecialidadesByEmpleado(id, empleado.EspecialidadIds);
+            var updatedEmpleado = await _empleadosService.UpdateEmpleadoAsync(id, empleadoExistente);
+            if (updatedEmpleado == null || updatedEspecialidadesByEmpleado == null)
             {
                 var response = new ApiResponse<Empleado>
                 {

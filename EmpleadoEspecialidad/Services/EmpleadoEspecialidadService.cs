@@ -53,5 +53,27 @@ namespace EmpleadoEspecialidades.Services
                 .ToListAsync();
         }
 
+        public async Task<List<Especialidad>> UpdateEspecialidadesByEmpleado(long IdEmpleado, List<long> especialidades)
+        {
+            var empleadoEspecialidades = await _context.EmpleadoEspecialidades
+                .Where(e => e.IdEmpleado == IdEmpleado)
+                .ToListAsync();
+            _context.EmpleadoEspecialidades.RemoveRange(empleadoEspecialidades);
+            var especialidadesToAdd = await _context.Especialidades
+                .Where(e => especialidades.Contains(e.Id))
+                .ToListAsync();
+            if (especialidadesToAdd.Count != especialidades.Count)
+            {
+                throw new Exception("Algunas especialidades no existen");
+            }
+            var empleadoEspecialidadesToAdd = especialidadesToAdd.Select(e => new EmpleadoEspecialidad
+            {
+                IdEmpleado = IdEmpleado,
+                IdEspecialidad = e.Id
+            }).ToList();
+            await _context.EmpleadoEspecialidades.AddRangeAsync(empleadoEspecialidadesToAdd);
+            await _context.SaveChangesAsync();
+            return especialidadesToAdd;
+        }
     }
 }

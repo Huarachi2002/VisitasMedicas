@@ -27,9 +27,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppDB\AppDB.csproj" />
+    <ProjectReference Include="..\Categoria\Categorias.csproj" />
     <ProjectReference Include="..\Clientes\Clientes.csproj" />
     <ProjectReference Include="..\EmpleadoEspecialidad\EmpleadoEspecialidades.csproj" />
     <ProjectReference Include="..\Empleados\Empleados.csproj" />
+    <ProjectReference Include="..\Especialidad\Especialidades.csproj" />
+    <ProjectReference Include="..\Periodo\Periodos.csproj" />
     <ProjectReference Include="..\Regionales\Regionales.csproj" />
     <ProjectReference Include="..\Sucursales\Sucursales.csproj" />
     <ProjectReference Include="..\Usuario\Usuarios.csproj" />

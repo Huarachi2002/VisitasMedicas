@@ -43,8 +43,11 @@ namespace Empleados.Services
             var empleadoExistente = await _context.Empleados.FindAsync(id);
             if (empleadoExistente == null) return null;
 
-            empleado.FechaRegistro = empleado.FechaRegistro.ToUniversalTime();
+            empleado.FechaRegistro = empleado.FechaRegistro.Kind == DateTimeKind.Utc
+                    ? empleado.FechaRegistro
+                    : empleado.FechaRegistro.ToUniversalTime();
             _context.Entry(empleadoExistente).CurrentValues.SetValues(empleado);
+
             await _context.SaveChangesAsync();
             return empleadoExistente;
         }

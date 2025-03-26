@@ -12,7 +12,11 @@ using Sucursales.Services;
 using Regionales.Services;
 using Usuarios.Services;
 using EmpleadoEspecialidades.Services;
+using Periodos.Services;
+using Categorias.Services;
 using System.Text.Json.Serialization;
+using Especialidades.Services;
+using Clientes1.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +40,8 @@ modelBuilder.EntitySet<TipoUsuario>("TipoUsuario");
 modelBuilder.EntitySet<Usuario>("Usuarios");
 modelBuilder.EntitySet<EmpleadoEspecialidad>("EmpleadoEspecialidades");
 modelBuilder.EntitySet<Especialidad>("Especialidades");
+modelBuilder.EntitySet<Periodo>("Periodos");
+modelBuilder.EntitySet<Categoria>("Categorias");
 
 
 var jwtIssuer = builder.Configuration.GetValue<string>("Jwt:Issuer");
@@ -108,11 +114,15 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<ClientesService>();
+builder.Services.AddScoped<Cliente1Service>();
 builder.Services.AddScoped<SucursalesService>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<EmpleadoEspecialidadService>();
 builder.Services.AddScoped<RegionalesService>();
 builder.Services.AddScoped<EmpleadosService>();
+builder.Services.AddScoped<PeriodoService>();
+builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<EspecialidadService>();
 builder.Services.AddControllers()
     .AddOData(opt => opt
         .Select()

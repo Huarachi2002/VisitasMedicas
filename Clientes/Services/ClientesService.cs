@@ -22,44 +22,36 @@ namespace Clientes.Services
             return _context.Clientes.AsQueryable();
         }
 
-        public async Task<Cliente> CreateClienteAsync(Cliente cliente, Cliente1 cliente1)
+        public async Task<Cliente> CreateClienteAsync(long IdCliente1 ,Cliente cliente)
         {
-            using(var transaction = await _context.Database.BeginTransactionAsync())
+            try
             {
-                try
-                {
-                    _context.Cliente1.Add(cliente1);
-                    await _context.SaveChangesAsync();
-
-                    cliente.IdCliente1 = cliente1.Id;
-
-                    _context.Clientes.Add(cliente);
-                    await _context.SaveChangesAsync();
-
-                    await transaction.CommitAsync();
-
-                    return cliente;
-                }
-                catch (Exception)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
+                cliente.IdCliente1 = IdCliente1;
+                _context.Clientes.Add(cliente);
+                await _context.SaveChangesAsync();
+                return cliente;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<Cliente> UpdateClienteAsync(long id, Cliente cliente)
         {
             var clienteExistente = await _context.Clientes.FindAsync(id);
-            if (clienteExistente == null) return null;
+            if ( clienteExistente == null ) return null;
 
-            cliente.FechaRegistro = cliente.FechaRegistro.ToUniversalTime();
-            cliente.fecha = cliente.fecha?.ToUniversalTime();
-            cliente.FechaUltimaCompra = cliente.FechaUltimaCompra.ToUniversalTime();
-
-            _context.Entry(clienteExistente).CurrentValues.SetValues(cliente);
-            await _context.SaveChangesAsync();
-            return clienteExistente;
+            try
+            {
+                _context.Entry(clienteExistente).CurrentValues.SetValues(cliente);
+                await _context.SaveChangesAsync();
+                return clienteExistente;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

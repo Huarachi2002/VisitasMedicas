@@ -39,10 +39,16 @@ namespace Regionales.Services
         {
             var regionalExistente = await _context.Regional.FindAsync(id);
             if (regionalExistente == null) return null;
-
-            _context.Entry(regionalExistente).CurrentValues.SetValues(regional);
-            await _context.SaveChangesAsync();
-            return regionalExistente;
+            try
+            {
+                _context.Entry(regionalExistente).CurrentValues.SetValues(regional);
+                await _context.SaveChangesAsync();
+                return regionalExistente;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

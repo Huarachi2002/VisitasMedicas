@@ -31,7 +31,8 @@ namespace AppDB.Models
         public string? Especialidad3 { get; set; }
         [Required]
         [MaxLength(15)]
-        public string Categoria { get; set; }
+        public long IdCategoria { get; set; }
+        public virtual Categoria? Categoria { get; set; }
         [Required]
         [MaxLength(15)]
         public string Dias { get; set; }

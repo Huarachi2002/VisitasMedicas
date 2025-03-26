@@ -10,6 +10,7 @@ namespace Empleados.Dto
 {
     public class EmpleadoDto
     {
+        public long? Id { get; set; }
         public string CodigoERP { get; set; }
         public string Nombre { get; set; }
         public string? Paterno { get; set; }

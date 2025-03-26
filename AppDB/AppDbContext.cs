@@ -14,11 +14,41 @@ public class AppDbContext : DbContext
     public DbSet<Sucursal> Sucursal { get; set; }
     public DbSet<Especialidad> Especialidades { get; set; }
     public DbSet<EmpleadoEspecialidad> EmpleadoEspecialidades { get; set; }
+    public DbSet<Periodo> Periodos { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
 
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // TODO: Periodo
+        modelBuilder.Entity<Periodo>()
+            .ToTable("Periodo", "ERP")
+            .HasData(
+                new Periodo { Id = 1, Nombre = "2024 - Enero", FechaInicio = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 2, Nombre = "2024 - Febrero", FechaInicio = new DateTime(2024, 2, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 2, 29, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 3, Nombre = "2024 - Marzo", FechaInicio = new DateTime(2024, 3, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 3, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 4, Nombre = "2024 - Abril", FechaInicio = new DateTime(2024, 4, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 4, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 5, Nombre = "2024 - Mayo", FechaInicio = new DateTime(2024, 5, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 5, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 6, Nombre = "2024 - Junio", FechaInicio = new DateTime(2024, 6, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 6, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 7, Nombre = "2024 - Julio", FechaInicio = new DateTime(2024, 7, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 7, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 8, Nombre = "2024 - Agosto", FechaInicio = new DateTime(2024, 8, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 8, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 9, Nombre = "2024 - Septiembre", FechaInicio = new DateTime(2024, 9, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 9, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 10, Nombre = "2024 - Octubre", FechaInicio = new DateTime(2024, 10, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 10, 31, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 11, Nombre = "2024 - Noviembre", FechaInicio = new DateTime(2024, 11, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 11, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new Periodo { Id = 12, Nombre = "2024 - Diciembre", FechaInicio = new DateTime(2024, 12, 1, 0, 0, 0, DateTimeKind.Utc), FechaFin = new DateTime(2024, 12, 31, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+
+        // TODO: Categoria
+        modelBuilder.Entity<Categoria>()
+            .ToTable("Categoria", "ERP")
+            .HasData(
+                new Categoria { Id = 1, Nombre = "A", Descripcion = "4 veces x mes" },
+                new Categoria { Id = 2, Nombre = "B", Descripcion = "2 veces x mes" },
+                new Categoria { Id = 3, Nombre = "C", Descripcion = "1 vez x mes" }
+            );
+
         // TODO: Especialidad
         modelBuilder.Entity<Especialidad>()
             .ToTable("Especialidad", "ERP")
@@ -158,6 +188,11 @@ public class AppDbContext : DbContext
             .HasOne(c1 => c1.Regional)
             .WithMany()
             .HasForeignKey(c1 => c1.IdRegional);
+
+        modelBuilder.Entity<Cliente1>()
+            .HasOne(c1 => c1.Categoria)
+            .WithMany()
+            .HasForeignKey(c1 => c1.IdCategoria);
 
         modelBuilder.Entity<Cliente1>()
             .ToTable("Cliente1", "ERP");
