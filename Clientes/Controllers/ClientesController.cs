@@ -1,5 +1,5 @@
 ﻿using BackendVisitaNET.Data;
-using BackendVisitaNET.Models;
+using AppDB.Models;
 using Clientes.Dto;
 using Clientes.Services;
 using Microsoft.AspNetCore.Authorization;

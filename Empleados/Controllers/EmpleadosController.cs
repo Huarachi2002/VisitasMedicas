@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using BackendVisitaNET.Models;
+using AppDB.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Formatter;
 using BackendVisitaNET.Data;
 using Empleados.Services;
+using Empleados.Dto;
+using EmpleadoEspecialidades.Services;
 
 namespace BackendVisitaNET.Controllers
 {
@@ -15,10 +17,12 @@ namespace BackendVisitaNET.Controllers
     public class EmpleadosController : ODataController
     {
         private readonly EmpleadosService _empleadosService;
+        private readonly EmpleadoEspecialidadService _empleadoEspecialidadService;
 
-        public EmpleadosController(EmpleadosService empleadosService)
+        public EmpleadosController(EmpleadosService empleadosService, EmpleadoEspecialidadService empleadoEspecialidadService)
         {
             _empleadosService = empleadosService;
+            _empleadoEspecialidadService = empleadoEspecialidadService;
         }
 
         [EnableQuery]
@@ -44,7 +48,7 @@ namespace BackendVisitaNET.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Empleado empleado)
+        public async Task<IActionResult> Post([FromBody] EmpleadoDto empleado)
         {
             if (empleado == null)
             {
@@ -60,7 +64,37 @@ namespace BackendVisitaNET.Controllers
 
             try
             {
-                var createdEmpleado = await _empleadosService.CreateEmpleadoAsync(empleado);
+                Empleado newEmpleado = new Empleado
+                {
+                    CodigoERP = empleado.CodigoERP,
+                    Nombre = empleado.Nombre,
+                    Paterno = empleado.Paterno,
+                    Materno = empleado.Materno,
+                    Direccion = empleado.Direccion,
+                    Telefono = empleado.Telefono,
+                    Celular = empleado.Celular,
+                    FechaRegistro = empleado.FechaRegistro,
+                    Estado = empleado.Estado,
+                    IdNivelC1 = empleado.IdNivelC1,
+                    VisitaProgramada = empleado.VisitaProgramada,
+                    IdSucursal = empleado.IdSucursal,
+                    Sucursal = empleado.Sucursal,
+                    PorcentajeDescuento = empleado.PorcentajeDescuento,
+                    Email = empleado.Email,
+                    ValidarUbicacion = empleado.ValidarUbicacion,
+                    tracking = empleado.tracking,
+                    IdListaPrecio = empleado.IdListaPrecio,
+                    ReImpresion = empleado.ReImpresion,
+                    Origen = empleado.Origen,
+                    CodigoSucursalSin = empleado.CodigoSucursalSin,
+                    CodigoPuntoVentaSin = empleado.CodigoPuntoVentaSin,
+                    EmpleadoFacturador = empleado.EmpleadoFacturador,
+                    AbonoPedido = empleado.AbonoPedido
+                };
+                var createdEmpleado = await _empleadosService.CreateEmpleadoAsync(newEmpleado);
+
+                var createdEmpleadoEspecialidades = await _empleadoEspecialidadService.AddEspecialidadesToEmpleado(createdEmpleado.Id, empleado.EspecialidadIds);
+
                 var response = new ApiResponse<Empleado>
                 {
                     Success = true,

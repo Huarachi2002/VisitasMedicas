@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BackendVisitaNET.Models;
+using AppDB.Models;
 
 public class AppDbContext : DbContext
 {
@@ -12,11 +12,28 @@ public class AppDbContext : DbContext
     public DbSet<TipoUsuario> TipoUsuarios { get; set; }
     public DbSet<Regional> Regional { get; set; }
     public DbSet<Sucursal> Sucursal { get; set; }
+    public DbSet<Especialidad> Especialidades { get; set; }
+    public DbSet<EmpleadoEspecialidad> EmpleadoEspecialidades { get; set; }
+
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        // TODO: Especialidad
+        modelBuilder.Entity<Especialidad>()
+            .ToTable("Especialidad", "ERP")
+            .HasData(
+                new Especialidad { Id = 1, Nombre = "CAR - CARDIOLOGIA" },
+                new Especialidad { Id = 2, Nombre = "CIR - CIRUGIA" },
+                new Especialidad { Id = 3, Nombre = "GIN - GINECOLOGIA" },
+                new Especialidad { Id = 4, Nombre = "MGE - MEDICINA GENERAL" },
+                new Especialidad { Id = 5, Nombre = "MIN - MEDICINA INTERNA" },
+                new Especialidad { Id = 6, Nombre = "ODO - ODONTOLOGIA" },
+                new Especialidad { Id = 7, Nombre = "PED - PEDIATRIA" },
+                new Especialidad { Id = 8, Nombre = "TRA - TRAUMATOLOGIA" }
+            );
+
+
         // TODO: Regional
         modelBuilder.Entity<Regional>()
             .ToTable("Regional", "NIV")
@@ -54,7 +71,9 @@ public class AppDbContext : DbContext
             .ToTable("TipoUsuario", "SIS")
             .HasData(
                 new TipoUsuario { Id = 1, CodigoERP = "001", Descripcion = "SuperAdministrador", Abreviatura = "SADM", Tipo = 1 },
-                new TipoUsuario { Id = 2, CodigoERP = "002", Descripcion = "Administrador", Abreviatura = "ADM", Tipo = 1 }
+                new TipoUsuario { Id = 2, CodigoERP = "002", Descripcion = "Administrador", Abreviatura = "ADM", Tipo = 1 },
+                new TipoUsuario { Id = 3, CodigoERP = "003", Descripcion = "Supervisor", Abreviatura = "SUP", Tipo = 1 },
+                new TipoUsuario { Id = 4, CodigoERP = "004", Descripcion = "Visitador", Abreviatura = "VIS", Tipo = 1 }
             );
 
 
@@ -72,7 +91,10 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Usuario>()
             .ToTable("Usuario", "SIS")
             .HasData(
-                new Usuario { Id = 1, Login = "DMS", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 1, IdTipoUsuario = 1, Imei = null }
+                new Usuario { Id = 1, Login = "DMS", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 1, IdTipoUsuario = 1, Imei = null },
+                new Usuario { Id = 2, Login = "admin", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 1, IdTipoUsuario = 2, Imei = null },
+                new Usuario { Id = 3, Login = "sup", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 2, IdTipoUsuario = 3, Imei = null },
+                new Usuario { Id = 4, Login = "vis", Contrasena = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=", Estado = 1, IdEmpleado = 3, IdTipoUsuario = 4, Imei = null }
             );
         
 
@@ -109,12 +131,27 @@ public class AppDbContext : DbContext
             .Property(e => e.FechaRegistro)
             .HasColumnType("timestamp with time zone");
 
-
         modelBuilder.Entity<Empleado>()
             .ToTable("Empleado", "ERP")
             .HasData(
-                new Empleado { Id = 1, CodigoERP = "admin", Nombre = "admin", Paterno = null, Materno = null, Direccion = null, Telefono = null, Celular = null, FechaRegistro = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), Estado = 1, IdNivelC1 = null, VisitaProgramada = 0, IdSucursal = 2, PorcentajeDescuento = 0, Email = null, ValidarUbicacion = 0, tracking = 0, IdListaPrecio = null, ReImpresion = 0, Origen = 0, CodigoSucursalSin = "-1", CodigoPuntoVentaSin = "-1", EmpleadoFacturador = null, AbonoPedido = null }
+                new Empleado { Id = 1, CodigoERP = "admin", Nombre = "admin", Paterno = null, Materno = null, Direccion = null, Telefono = null, Celular = null, FechaRegistro = new DateTime(2023, 2, 2, 0, 0, 0, DateTimeKind.Utc), Estado = 2, IdNivelC1 = null, VisitaProgramada = 0, IdSucursal = 2, PorcentajeDescuento = 0, Email = null, ValidarUbicacion = 0, tracking = 0, IdListaPrecio = null, ReImpresion = 0, Origen = 0, CodigoSucursalSin = "-1", CodigoPuntoVentaSin = "-1", EmpleadoFacturador = null, AbonoPedido = null },
+                new Empleado { Id = 2, CodigoERP = "sup", Nombre = "sup", Paterno = null, Materno = null, Direccion = null, Telefono = null, Celular = null, FechaRegistro = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), Estado = 1, IdNivelC1 = null, VisitaProgramada = 0, IdSucursal = 3, PorcentajeDescuento = 0, Email = null, ValidarUbicacion = 0, tracking = 0, IdListaPrecio = null, ReImpresion = 0, Origen = 0, CodigoSucursalSin = "-1", CodigoPuntoVentaSin = "-1", EmpleadoFacturador = null, AbonoPedido = null },
+                new Empleado { Id = 3, CodigoERP = "vis", Nombre = "vis", Paterno = null, Materno = null, Direccion = null, Telefono = null, Celular = null, FechaRegistro = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc), Estado = 1, IdNivelC1 = null, VisitaProgramada = 0, IdSucursal = 1, PorcentajeDescuento = 0, Email = null, ValidarUbicacion = 0, tracking = 0, IdListaPrecio = null, ReImpresion = 0, Origen = 0, CodigoSucursalSin = "-1", CodigoPuntoVentaSin = "-1", EmpleadoFacturador = null, AbonoPedido = null }
             );
+
+        // TODO: EmpleadoEspecialidad
+        modelBuilder.Entity<EmpleadoEspecialidad>()
+            .HasOne(e => e.Empleado)
+            .WithMany(e => e.EmpleadoEspecialidades)
+            .HasForeignKey(e => e.IdEmpleado);
+
+        modelBuilder.Entity<EmpleadoEspecialidad>()
+            .HasOne(e => e.Especialidad)
+            .WithMany(e => e.EmpleadoEspecialidades)
+            .HasForeignKey(e => e.IdEspecialidad);
+
+        modelBuilder.Entity<EmpleadoEspecialidad>()
+            .HasKey(ee => new { ee.IdEmpleado, ee.IdEspecialidad });
 
         // TOOD: Cliente1
         modelBuilder.Entity<Cliente1>()

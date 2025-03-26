@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendVisitaNET.Models
+namespace AppDB.Models
 {
     [Table("Usuario", Schema = "SIS")]
     public class Usuario
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
         [MaxLength(20)]

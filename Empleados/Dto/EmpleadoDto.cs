@@ -1,28 +1,23 @@
 ﻿using AppDB.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AppDB.Models
+namespace Empleados.Dto
 {
-    [Table("Empleado", Schema = "ERP")]
-    public class Empleado
+    public class EmpleadoDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
-        [Required]
-        public string CodigoERP { get; set; } 
-        [Required]
-        [MaxLength(200)]
+        public string CodigoERP { get; set; }
         public string Nombre { get; set; }
         public string? Paterno { get; set; }
         public string? Materno { get; set; }
         public string? Direccion { get; set; }
         public string? Telefono { get; set; }
         public string? Celular { get; set; }
-        [Required]
         public DateTime FechaRegistro { get; set; }
-        [Required]
         public int Estado { get; set; }
         public long? IdNivelC1 { get; set; }
         public int? VisitaProgramada { get; set; }
@@ -39,6 +34,8 @@ namespace AppDB.Models
         public string? CodigoPuntoVentaSin { get; set; }
         public long? EmpleadoFacturador { get; set; }
         public int? AbonoPedido { get; set; }
-        public ICollection<EmpleadoEspecialidad> EmpleadoEspecialidades { get; set; }
+
+        public List<long> EspecialidadIds { get; set; }
+
     }
 }

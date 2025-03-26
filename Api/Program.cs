@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OData.ModelBuilder;
-using BackendVisitaNET.Models;
+using AppDB.Models;
 using Microsoft.AspNetCore.Authorization;
 using Clientes.Services;
 using Empleados.Services;
 using Sucursales.Services;
 using Regionales.Services;
 using Usuarios.Services;
+using EmpleadoEspecialidades.Services;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +34,8 @@ modelBuilder.EntitySet<Cliente1>("Cliente1");
 modelBuilder.EntitySet<Empleado>("Empleados");
 modelBuilder.EntitySet<TipoUsuario>("TipoUsuario");
 modelBuilder.EntitySet<Usuario>("Usuarios");
+modelBuilder.EntitySet<EmpleadoEspecialidad>("EmpleadoEspecialidades");
+modelBuilder.EntitySet<Especialidad>("Especialidades");
 
 
 var jwtIssuer = builder.Configuration.GetValue<string>("Jwt:Issuer");
@@ -106,6 +110,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<ClientesService>();
 builder.Services.AddScoped<SucursalesService>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<EmpleadoEspecialidadService>();
 builder.Services.AddScoped<RegionalesService>();
 builder.Services.AddScoped<EmpleadosService>();
 builder.Services.AddControllers()
@@ -116,7 +121,8 @@ builder.Services.AddControllers()
         .Expand()
         .Count()
         //.SetMaxTop(100) // Opcional, establece un límite de resultados
-        .AddRouteComponents("odata", modelBuilder.GetEdmModel()));
+        .AddRouteComponents("odata", modelBuilder.GetEdmModel()))
+        .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

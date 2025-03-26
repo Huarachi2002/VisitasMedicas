@@ -4,24 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AppDB.Models
 {
-    [Table("TipoUsuario", Schema = "SIS")]
-    public class TipoUsuario
+    [Table("EmpleadoEspecialidad", Schema = "ERP")]
+    public class EmpleadoEspecialidad
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string CodigoERP { get; set; }
+        public long IdEmpleado { get; set; }
+        [JsonIgnore]
+        public virtual Empleado? Empleado { get; set; }
         [Required]
-        [MaxLength(50)]
-        public string Descripcion { get; set; }
-        [MaxLength(10)]
-        public string? Abreviatura { get; set; }
-        public int Tipo { get; set; }
+        public long IdEspecialidad { get; set; }
+        public virtual Especialidad? Especialidad { get; set; }
     }
 }

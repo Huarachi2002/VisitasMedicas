@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendVisitaNET.Models
+namespace AppDB.Models
 {
     [Table("Cliente", Schema = "ERP")]
     public class Cliente

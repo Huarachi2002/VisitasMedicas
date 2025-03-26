@@ -1,4 +1,4 @@
-﻿using BackendVisitaNET.Models;
+﻿using AppDB.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

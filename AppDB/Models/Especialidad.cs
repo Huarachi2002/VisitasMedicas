@@ -8,20 +8,16 @@ using System.Threading.Tasks;
 
 namespace AppDB.Models
 {
-    [Table("TipoUsuario", Schema = "SIS")]
-    public class TipoUsuario
+    [Table("Especialidad", Schema = "ERP")]
+    public class Especialidad
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string CodigoERP { get; set; }
-        [Required]
         [MaxLength(50)]
-        public string Descripcion { get; set; }
-        [MaxLength(10)]
-        public string? Abreviatura { get; set; }
-        public int Tipo { get; set; }
+        public string Nombre { get; set; }
+        public ICollection<EmpleadoEspecialidad> EmpleadoEspecialidades { get; set; }
+
     }
 }
