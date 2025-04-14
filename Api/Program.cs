@@ -17,6 +17,7 @@ using Categorias.Services;
 using System.Text.Json.Serialization;
 using Especialidades.Services;
 using Clientes1.Services;
+using System.Text.Json;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -132,7 +133,12 @@ builder.Services.AddControllers()
         .Count()
         //.SetMaxTop(100) // Opcional, establece un límite de resultados
         .AddRouteComponents("odata", modelBuilder.GetEdmModel()))
-        .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+        .AddJsonOptions(x => { 
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; 
+            
+            x.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+             
+        });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

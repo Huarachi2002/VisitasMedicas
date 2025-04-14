@@ -236,7 +236,7 @@ namespace BackendVisitaNET.Controllers
             clienteExistente.AplicarSustituto = cliente.AplicarSustituto;
 
             var updatedCliente = await _clientesService.UpdateClienteAsync(id, clienteExistente);
-            var updatedCliente1 = await _cliente1Service.UpdateCliente1(cliente.IdCliente1, cliente1Existente);
+            var updatedCliente1 = await _cliente1Service.UpdateCliente1((long)cliente.IdCliente1, cliente1Existente);
             if (updatedCliente == null)
             {
                 var response = new ApiResponse<Cliente>

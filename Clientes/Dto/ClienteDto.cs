@@ -13,10 +13,10 @@ namespace Clientes.Dto
         public long? Id { get; set; }
         public string? CodigoERP { get; set; }
         public string? Ci { get; set; }
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
         public string? Paterno { get; set; }
         public string? Materno { get; set; }
-        public string Nit { get; set; }
+        public string? Nit { get; set; }
         public string? Direccion { get; set; }
         public string? Telefono { get; set; }
         public string? Email { get; set; }
@@ -35,7 +35,7 @@ namespace Clientes.Dto
         public string? HashCode { get; set; }
         public string? Celular { get; set; }
         public long? IdTabla { get; set; }
-        public long IdCliente1 { get; set; }
+        public long? IdCliente1 { get; set; }
         public int Visitado { get; set; }
         public long? IdTipoPersona { get; set; }
         public long? TipoLista { get; set; }
