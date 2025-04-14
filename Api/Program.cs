@@ -111,7 +111,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:4200")
               .AllowAnyMethod()
               .AllowAnyHeader()
-              .AllowCredentials()); // Si usas autenticación JWT con cookies
+              .AllowCredentials());
 });
 
 builder.Services.AddScoped<ClientesService>();
@@ -134,7 +134,7 @@ builder.Services.AddControllers()
         //.SetMaxTop(100) // Opcional, establece un límite de resultados
         .AddRouteComponents("odata", modelBuilder.GetEdmModel()))
         .AddJsonOptions(x => { 
-            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; 
+            //x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; 
             
             x.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
              
